@@ -390,8 +390,10 @@ function fitText(element,max,min){
  while(size>min&&(element.scrollHeight>element.clientHeight+1||element.scrollWidth>element.clientWidth+1)){size-=1;element.style.fontSize=size+'px';}
 }
 function scheduleFit(){requestAnimationFrame(()=>{
- fitText($('sentence'),Math.min(88,innerHeight*.105,innerWidth*.058),16);
- document.querySelectorAll('.choice').forEach(button=>fitText(button,Math.min(64,innerHeight*.075,innerWidth*.043),14));
+ if(window.fitQuiz)window.fitQuiz();
+ const workspace=$('workspace');
+ fitText($('sentence'),Math.min(88,workspace.clientHeight*.105,workspace.clientWidth*.058),16);
+ document.querySelectorAll('.choice').forEach(button=>fitText(button,Math.min(64,workspace.clientHeight*.075,workspace.clientWidth*.043),14));
 });}
 window.addEventListener('resize',scheduleFit);
 if(window.visualViewport)window.visualViewport.addEventListener('resize',scheduleFit);
